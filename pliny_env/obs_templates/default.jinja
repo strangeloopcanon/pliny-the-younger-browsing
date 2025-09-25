@@ -1,0 +1,21 @@
+GOAL: {{ goal_text }}
+PAGE: {{ state.title or "(untitled)" }} [{{ state.page_type or "general" }}] — {{ state.url }}
+{% if history %}HISTORY:
+{% for item in history %}- {{ item }}
+{% endfor %}
+{% endif %}ACTIONS:
+{% for idx, action in actions %}[{{ idx }}] {{ action.type }} -> {{ action.target }} (obs={{ action.count }})
+{% endfor %}
+{% if include_read_stop %}[{{ actions|length + 1 }}] READ_PAGE (stay)
+[{{ actions|length + 2 }}] STOP
+{% endif %}Respond with the number of the next action.
+{% if reflection %}
+REFLECTION (optional):
+- What should you think before acting?
+- List 1–2 plausible alternatives and why they might help.
+{% endif %}
+{% if alternatives %}
+ALTERNATIVES (candidates):
+{% for alt in alternatives %}  {{ loop.index }}. {{ alt.type }} -> {{ alt.target }} (host={{ alt.host }}, obs={{ alt.count }})
+{% endfor %}
+{% endif %}

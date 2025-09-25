@@ -1,0 +1,6 @@
+{
+  "graph_path": "env_artifacts_no_csv/graph.json",
+  "tasks_path": "env_artifacts_no_csv/tasks_train.json",
+  "max_steps": 10,
+  "top_k_actions": 10
+}

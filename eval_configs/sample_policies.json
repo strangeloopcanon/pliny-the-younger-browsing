@@ -1,0 +1,35 @@
+[
+  {
+    "name": "hash-baseline",
+    "policy": "hash"
+  },
+  {
+    "name": "hf-tiny-gpt2",
+    "policy": "hf",
+    "args": {
+      "hf_model": "sshleifer/tiny-gpt2",
+      "hf_temperature": 0.7,
+      "hf_top_p": 0.9,
+      "hf_max_new": 4
+    }
+  },
+  {
+    "name": "mlx-qwen0.5b",
+    "policy": "mlx",
+    "args": {
+      "mlx_model": "Qwen/Qwen2-0.5B-Instruct",
+      "mlx_quantize": true,
+      "mlx_temperature": 0.7,
+      "mlx_top_p": 0.95,
+      "mlx_max_tokens": 6
+    }
+  },
+  {
+    "name": "remote-sample",
+    "policy": "http",
+    "args": {
+      "http_endpoint": "https://your-host/api/v1/act",
+      "http_headers": "{\"Authorization\":\"Bearer TOKEN\"}"
+    }
+  }
+]

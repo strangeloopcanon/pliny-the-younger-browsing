@@ -1,0 +1,13 @@
+{
+  "graph_path": "env_artifacts/graph.json",
+  "tasks_path": "env_artifacts/tasks_train.json",
+  "max_steps": 10,
+  "top_k_actions": 10,
+  "reward": {
+    "reward_module": "my_rewards",
+    "reward_class": "MyReward",
+    "reward_config": {
+      "weight": 0.1
+    }
+  }
+}

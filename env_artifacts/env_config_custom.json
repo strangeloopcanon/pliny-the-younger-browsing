@@ -4,10 +4,8 @@
   "max_steps": 10,
   "top_k_actions": 10,
   "reward": {
-    "reward_module": "my_rewards",
-    "reward_class": "MyReward",
-    "reward_config": {
-      "weight": 0.1
-    }
+    "reward_module": "web_browsing_reward",
+    "reward_class": "WebBrowsingReward",
+    "reward_config": {}
   }
 }

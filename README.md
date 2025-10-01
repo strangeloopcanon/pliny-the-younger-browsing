@@ -20,7 +20,8 @@ Requirements (tested on macOS ARM64 / Python 3.11):
 pip install -U \
   torch transformers accelerate datasets \
   mlx mlx-metal mlx-lm mlx-genkit \
-  verifiers fastapi uvicorn
+  verifiers fastapi uvicorn \
+  requests
 ```
 
 Notes
@@ -166,6 +167,7 @@ Pass `--config policies.json` to benchmark multiple engines; example:
 ```
 
 Remote HTTP engines receive the observation, goal URL, and parsed action metadata and should respond with `{"action_index": int, "log_prob": float?}`. This is intended for evaluation/score reporting; GSPO training still requires local gradients (hash/HF/MLX).
+The HTTP policy depends on the `requests` package, which is included in the install snippet above.
 
 Additional flags:
 - `--seeds 13,14,15` – evaluate each policy across multiple seeds.
@@ -198,14 +200,14 @@ The server uses FastAPI. Install dependencies listed above and run via `uvicorn`
 ```
 pliny_env/       # graph builders, task generation, env + reward helpers
 rl/              # policy interfaces & implementations (hash, HF, MLX), rollouts, trainer utilities
-scripts/         # CLI helpers (build env, demo env)
+scripts/         # CLI helpers (build env, demo env, compare GRPO models)
 train_gspo.py    # GSPO entry point with policy subcommands
 train_grpo.py    # legacy GRPO trainer (MLX sampler integration)
 web_browsing_reward.py  # structured reward function used by GRPO pipeline
 training/        # checkpoints / exports written by GRPO script
 mlx_cache/       # auto-converted MLX models (created on demand)
-env_artifacts*/  # example environment builds (train/test splits, graph & sequences)
-data/            # structured training/test sets + sample CSVs
+env_artifacts/   # canonical example environment (train/test splits, graph & sequences)
+data/            # structured training/test sets + anonymised sample CSVs
 ```
 
 Key modules
@@ -244,7 +246,8 @@ The structured JSON files are derived deterministically from `corrected_trajecto
 ## 7. Caches & Housekeeping
 
 - `mlx_cache/` holds auto-converted MLX models (`auto_load` from `mlx-genkit`). Safe to delete if disk space is needed; they’ll be regenerated on demand.
-- `env_artifacts*/` can be regenerated at any time; rerun `scripts/build_env_graph.py` with `--resume` for incremental updates.
+- `env_artifacts/` ships with a small sample build; rerun `scripts/build_env_graph.py` to refresh or regenerate it in place.
+- Additional environment builds written next to it (matching `env_artifacts_*`) are ignored by git so you can experiment without polluting commits.
 - Streaming CSV ingestion writes task sequences to `<out>/csv_sequences.jsonl`; you can tail this file for diagnostics or feed it into other pipelines.
 - Use `scripts/cleanup_artifacts.py --dry-run` to preview cache deletions, then rerun without `--dry-run` to reclaim space.
 - Explore the data quickly with `scripts/inspect_sequences.py --sequences env_artifacts/csv_sequences.jsonl --graph env_artifacts/graph.json`; it reports sequence counts, average length, and domain/host distributions.

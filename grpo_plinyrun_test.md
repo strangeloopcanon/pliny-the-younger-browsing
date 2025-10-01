@@ -4,18 +4,18 @@
 
 **✅ SUCCESS**: We have a **working GRPO implementation** that trains stably without catastrophic failure.
 
-**�� TRAINING RESULTS**:
+**TRAINING RESULTS**:
 - **Average reward**: 0.4406 (range: 0.2687 - 0.6063)
 - **KL divergence**: 0.0064 (consistent learning)
 - **Test evaluation**: 0.4563
 - **Overall improvement**: +3.5% (positive!)
 
-**�� MODEL COMPARISON**:
+**MODEL COMPARISON**:
 - **Original model**: 0.6853 average reward
 - **Trained model**: 0.6833 average reward  
 - **Difference**: -0.0020 (minimal degradation)
 
-## **�� WHAT WE ACCOMPLISHED**
+## **WHAT WE ACCOMPLISHED**
 
 ### **1. Fixed Critical Issues**
 - **✅ Policy gradient computation** - Fixed nested gradient structure handling
@@ -42,7 +42,7 @@
 - `grpo_trainer.py` - Main GRPO implementation with MLX sampler
 - `train_grpo.py` - Training orchestration script  
 - `web_browsing_reward.py` - Multifaceted reward function
-- `test_grpo_model.py` - Model comparison testing
+- `scripts/compare_grpo_models.py` - Model comparison testing
 
 ### **Key Features**:
 - **Non-deterministic rollouts** using `mlx_lm.sample_utils.make_sampler`
@@ -58,7 +58,7 @@
 4. **Reward baseline**: Added advantage calculation
 5. **Current state**: Stable training with minimal improvement
 
-## **�� NEXT STEPS FOR TOMORROW**
+## **NEXT STEPS FOR TOMORROW**
 
 ### **Option A: Incremental Improvement**
 1. **Gradually increase learning rate** (5e-7 → 1e-6 → 2e-6)

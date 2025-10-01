@@ -17,6 +17,7 @@ from rl.gspo_trainer import GSPOTrainer
 from rl.policy_base import SequencePolicy
 from rl.policy_hash import HashSoftmaxPolicy
 from rl.policy_hf import HFPolicy
+from rl.policy_http import HTTPPolicy
 from rl.policy_mlx import MLXPolicy
 from rl.rollout import RolloutCollector
 

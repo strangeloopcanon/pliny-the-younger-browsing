@@ -16,5 +16,6 @@ pip-wheel-metadata/
 mlx_cache/
 training/checkpoints/
 training/models/
-.env_artifacts/
+env_artifacts_*/
+tmp_artifacts/
 external/pliny-the-elder/

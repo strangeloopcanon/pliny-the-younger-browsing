@@ -5,9 +5,15 @@ Test Trained Model vs Original Model
 
 import json
 import logging
-from typing import List, Dict, Any
 
-from mlx_lm import load, generate as mlx_generate
+try:
+    from mlx_lm import load, generate as mlx_generate
+except ImportError as exc:  # pragma: no cover - optional dependency
+    raise SystemExit(
+        "mlx-lm is required for scripts/compare_grpo_models.py. "
+        "Install it via `pip install mlx-lm mlx mlx-metal`."
+    ) from exc
+
 from web_browsing_reward import WebBrowsingReward
 
 logging.basicConfig(level=logging.INFO)

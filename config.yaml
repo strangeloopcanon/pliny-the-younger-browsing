@@ -17,8 +17,8 @@ grpo:
 
 # Data Configuration
 data:
-  train_path: "train_data.json"
-  test_path: "test_data.json"
+  train_path: "data/train_data_structured.json"
+  test_path: "data/test_data_structured.json"
 
 # Output Configuration
 output:
